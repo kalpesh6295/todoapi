@@ -2,7 +2,8 @@ var mongoose = require('mongoose');
 
 var Todo = mongoose.model('todo',{
     text:{type: String,
-    required:true},
+    required:true,
+trim:true},
     completed: {type:Boolean,
     default: true},
     completedAt: {
