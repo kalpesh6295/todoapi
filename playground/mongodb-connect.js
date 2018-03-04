@@ -5,9 +5,9 @@ MongoClient.connect('mongodb://localhost:27017/todoapp',(err,db)=>{
     }
     console.log('success');
     db.collection('users').insertOne({
-        name: 'michell',
-        age:21,
-        location:'kohima'
+        name: 'saurabh',
+        age:22,
+        location:'jaipur'
     },(err,result)=>{
         if(err){
             console.log(err);
