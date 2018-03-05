@@ -51,19 +51,44 @@ describe('POST /Todos', ()=>{
     //     })
     //})
 
-    describe('get /todos/:id',()=>{
-        it('should return todo doc',(done)=>{
+    // describe('get /todos/:id',()=>{
+    //     it('should return todo doc',(done)=>{
+    //        // var HexId =todo[0]._id.toHexString();
+    //        Todo.find().then((todos)=>{
+    //        var HexId=todos[0]._id.toHexString();
+    //         request(app)
+    //         .get(`/todos/${HexId}`)
+    //         .expect(200)
+    //         .expect((res)=>{
+                
+    //            expect(res.body.text).toBe(todos[0].text);
+    //         })
+    //         .end(done);
+    //     });
+    // });
+    // });
+
+    describe('delete /todos/:id',()=>{
+        it('should delete todo doc',(done)=>{
            // var HexId =todo[0]._id.toHexString();
            Todo.find().then((todos)=>{
            var HexId=todos[0]._id.toHexString();
+           var length = todos.length;
             request(app)
-            .get(`/todos/${HexId}`)
+            .delete(`/todos/${HexId}`)
             .expect(200)
             .expect((res)=>{
-                
-               expect(res.body.text).toBe(todos[0].text);
+               expect(res.body._id).toBe(HexId);
+               
             })
-            .end(done);
+            .end((err,res)=>{
+                if(err){ return done(err)}
+                Todo.findById(HexId).then((todo)=>{
+                    console.log(todo);
+                    expect(todo).toNotExist();
+                    done();
+                })
+            });
         });
     });
     });
