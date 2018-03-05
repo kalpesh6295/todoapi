@@ -40,7 +40,13 @@ app.get('/todos',(req,res)=>{
         res.status(400).send(e);
     });
 });
-
+app.get('/users',(req,res)=>{
+    user.find().then((users)=>{
+        res.send({users});
+    },(e)=>{
+        res.status(400).send(e);
+    });
+});
 app.get('/todos/:id',(req,res)=>{
     var id = req.params.id;
     if(!ObjectID.isValid(id)){
